@@ -1,4 +1,4 @@
-# ![icon](icon.png | width=132) matlab_functions_verification
+# <img src="icon.png" width="132"/> matlab_functions_verification
 
 [English](README.md) **|** [简体中文](README_CN.md) &emsp; [GitHub](https://github.com/xinntao/matlab_functions_verification) **|** [Gitee码云](https://gitee.com/xinntao/matlab_functions_verification)
 
