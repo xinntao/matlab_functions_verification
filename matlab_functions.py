@@ -85,6 +85,7 @@ def calculate_weights_indices(in_length, out_length, scale, kernel,
     return weights, indices, int(sym_len_s), int(sym_len_e)
 
 
+@torch.no_grad()
 def imresize(img, scale, antialiasing=True):
     """imresize function same as MATLAB.
 
