@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-from matlab_functions import imresize
+from imresize import imresize
 
 # read images
 img = cv2.imread('imresize_bicubic/baboon.png') / 255.
@@ -19,6 +19,5 @@ for mode in ['down', 'up']:
         diff_abssum = np.sum(np.abs(diff))
         h, w, _ = img_resize_matlab.shape
         diff_ratio = diff_abssum / (h * w) * 100
-        print(
-            f'Mode {mode} X {scale}. Diff: {diff_abssum:d}, {diff_ratio:.2f}%.'
-        )
+        print(f'Mode {mode} X {scale}. Diff: {int(diff_abssum):d},'
+              f' {diff_ratio:.2f}%.')
