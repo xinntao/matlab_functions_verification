@@ -6,7 +6,7 @@ from matlab_functions import imresize
 # read images
 img = cv2.imread('imresize_bicubic/baboon.png') / 255.
 
-# upsample
+# test
 for mode in ['down', 'up']:
     for scale in [2, 3, 4]:
         img_resize = imresize(img, 2, antialiasing=True)
