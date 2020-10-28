@@ -26,7 +26,7 @@ Run on CPU Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz.
 
 Average on 100 runs.
 
-| Scale  | Time (Ours)   | Time ([bicubic_pytorch](https://github.com/thstkdgus35/bicubic_pytorch))    | MATLAB |
+| Scale  | Time (Ours)   | Time ([bicubic_pytorch](https://github.com/thstkdgus35/bicubic_pytorch))    | Time (MATLAB) |
 | :------------- | :----------: |:----------: | :----------: |
 | Downsample X2 | 0.0689 | **0.0019** | 0.0017|
 | Downsample X3 | 0.0475 | **0.0028** | 0.0013|
