@@ -105,7 +105,7 @@ def imresize(img, scale, antialiasing=True):
     """
     if type(img).__module__ == np.__name__:  # numpy type
         numpy_type = True
-        img = torch.from_numpy(img.transpose(2, 0, 1))
+        img = torch.from_numpy(img.transpose(2, 0, 1)).float()
     else:
         numpy_type = False
 
@@ -138,12 +138,9 @@ def imresize(img, scale, antialiasing=True):
     kernel_width = weights_h.size(1)
     for i in range(out_h):
         idx = int(indices_h[i][0])
-        out_1[0, i, :] = img_aug[0, idx:idx + kernel_width, :].transpose(
-            0, 1).mv(weights_h[i])
-        out_1[1, i, :] = img_aug[1, idx:idx + kernel_width, :].transpose(
-            0, 1).mv(weights_h[i])
-        out_1[2, i, :] = img_aug[2, idx:idx + kernel_width, :].transpose(
-            0, 1).mv(weights_h[i])
+        for j in range(in_c):
+            out_1[j, i, :] = img_aug[j, idx:idx + kernel_width, :].transpose(
+                0, 1).mv(weights_h[i])
 
     # process W dimension
     # symmetric copying
@@ -164,12 +161,9 @@ def imresize(img, scale, antialiasing=True):
     kernel_width = weights_w.size(1)
     for i in range(out_w):
         idx = int(indices_w[i][0])
-        out_2[0, :, i] = out_1_aug[0, :,
-                                   idx:idx + kernel_width].mv(weights_w[i])
-        out_2[1, :, i] = out_1_aug[1, :,
-                                   idx:idx + kernel_width].mv(weights_w[i])
-        out_2[2, :, i] = out_1_aug[2, :,
-                                   idx:idx + kernel_width].mv(weights_w[i])
+        for j in range(in_c):
+            out_1[j, i, :] = img_aug[j, idx:idx + kernel_width, :].transpose(
+                0, 1).mv(weights_h[i])
 
     if numpy_type:
         out_2 = out_2.numpy().transpose(1, 2, 0)
