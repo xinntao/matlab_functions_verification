@@ -27,7 +27,7 @@ def calculate_weights_indices(in_length, out_length, scale, kernel,
         antialisaing (bool): Whether to apply anti-aliasing when downsampling.
     """
 
-    if scale < 1 and antialiasing:
+    if (scale < 1) and antialiasing:
         # Use a modified kernel (larger kernel width) to simultaneously
         # interpolate and antialias
         kernel_width = kernel_width / scale
@@ -59,7 +59,7 @@ def calculate_weights_indices(in_length, out_length, scale, kernel,
     distance_to_center = u.view(out_length, 1).expand(out_length, p) - indices
 
     # apply cubic kernel
-    if scale < 1 and antialiasing:
+    if (scale < 1) and antialiasing:
         weights = scale * cubic(distance_to_center * scale)
     else:
         weights = cubic(distance_to_center)
@@ -162,8 +162,8 @@ def imresize(img, scale, antialiasing=True):
     for i in range(out_w):
         idx = int(indices_w[i][0])
         for j in range(in_c):
-            out_1[j, i, :] = img_aug[j, idx:idx + kernel_width, :].transpose(
-                0, 1).mv(weights_h[i])
+            out_2[j, :, i] = out_1_aug[j, :,
+                                       idx:idx + kernel_width].mv(weights_w[i])
 
     if numpy_type:
         out_2 = out_2.numpy().transpose(1, 2, 0)
