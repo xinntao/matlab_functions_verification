@@ -23,6 +23,8 @@ for mode in ['down', 'up']:
     for scale in [2, 3, 4]:
         if mode == 'down':
             resize_scale = 1 / scale
+        else:
+            resize_scale = scale
         img_resize = imresize_np(img, resize_scale, antialiasing=True)
         img_resize = (img_resize * 255).round()
         img_resize_matlab = cv2.imread(
