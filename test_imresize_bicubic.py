@@ -5,11 +5,11 @@ import torch
 from imresize import imresize
 
 
-def imresize_np(img):
+def imresize_np(img, resize_scale, antialiasing=True):
     if type(img).__module__ == np.__name__:  # numpy type
         numpy_type = True
         img = torch.from_numpy(img.transpose(2, 0, 1)).float()
-    out = imresize(img)
+    out = imresize(img, resize_scale, antialiasing=True)
     if numpy_type:
         out = out.numpy().transpose(1, 2, 0)
     return out
